@@ -1,58 +1,21 @@
 import Alpine from 'alpinejs'
 
+Alpine.store('images', {
+    image_1: new URL('./assets/1 rood.png', import.meta.url),
+    image_2: new URL('./assets/2 rood.png', import.meta.url),
+    image_3: new URL('./assets/3 rood.png', import.meta.url),
+    image_4: new URL('./assets/4 rood.png', import.meta.url),
+})
+
 window.Alpine = Alpine
 
 Alpine.start()
 
-function timer(expiry) {
-    return {
-        expiry: expiry,
-        remaining: null,
-        init() {
-            this.setRemaining()
-            setInterval(() => {
-                this.setRemaining()
-            }, 1000)
-        },
-        setRemaining() {
-            const diff = this.expiry - new Date().getTime()
-            this.remaining = parseInt(diff / 1000)
-        },
-        days() {
-            return {
-                value: this.remaining / 86400,
-                remaining: this.remaining % 86400,
-            }
-        },
-        hours() {
-            return {
-                value: this.days().remaining / 3600,
-                remaining: this.days().remaining % 3600,
-            }
-        },
-        minutes() {
-            return {
-                value: this.hours().remaining / 60,
-                remaining: this.hours().remaining % 60,
-            }
-        },
-        seconds() {
-            return {
-                value: this.minutes().remaining,
-            }
-        },
-        format(value) {
-            return ('0' + parseInt(value)).slice(-2)
-        },
-        time() {
-            return {
-                days: this.format(this.days().value),
-                hours: this.format(this.hours().value),
-                minutes: this.format(this.minutes().value),
-                seconds: this.format(this.seconds().value),
-            }
-        },
-    }
+export const urls = {
+    image_1: new URL('./assets/1 groen.png', import.meta.url),
+    image_2: new URL('./assets/2 groen.png', import.meta.url),
+    image_3: new URL('./assets/3 groen.png', import.meta.url),
+    image_4: new URL('./assets/4 groen.png', import.meta.url)
 }
 
-export default timer
+
