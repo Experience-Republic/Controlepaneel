@@ -14,8 +14,8 @@
     </head>
     <body>
         <div
-            x-data="{ open: false, countdownTimer : timer(new Date().setMinutes(new Date().getMinutes() + 10))}"
-            x-init="countdownTimer.init();"
+            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setMinutes(new Date().getMinutes() + 10)), correct_answers: 0, open_video: false, time_expired: false }"
+            x-init="countdownTimer.init($data);"
         >
             <div
                 class="bg-indigo-500 w-1/6 text-center rounded-lg mx-auto timer"
@@ -42,10 +42,25 @@
             <!-- The alert that warns if a time penalty has been awarded after a wrong answer. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 border-indigo-600 rounded-md bg-white p-10 z-50 font-bold text-3xl"
-                x-show="open">
+                x-show="open"
+            >
                 -10 Seconds!
             </div>
-            </div>
+            <!-- Here a video is played -->
+            <video
+                class="fixed top-0 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
+                x-show="open_video"
+                controls
+                autoplay
+                src="assets/videos/All Correct.mp4"
+            ></video>
+            <video
+                class="fixed top-0 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
+                x-show="time_expired"
+                controls
+                autoplay
+                src="assets/videos/Timer Expired.mp4"
+        ></video>
         </div>
         <div class="flex flex-row">
             <div class="flex flex-col items-center w-1/2">
@@ -80,25 +95,24 @@
 
         <!-- A background image -->
         <!-- A button that says "Press enter to start" -->
-        <!-- A popup that pops up when a wrong code is entered, indicating a time penalty -->
         <script>
             function timer(expiry) {
                 return {
                     expired: false, // Whether the timer has expired
                     expiry: expiry,
                     remaining: null,
-                    init() {
+                    init(data) {
                         this.setRemaining()
-                        // Update every second until the timer expires.
                         setInterval(() => {
-                            this.setRemaining()
+                            this.setRemaining(data)
                         }, 1000)
                     },
-                    setRemaining() {
+                    setRemaining(data) {
                         const diff = this.expiry - new Date().getTime()
                         // If the timer has expired, set the remaining time to 0, otherwise set it to the difference.
                         if (diff <= 0) {
-                            this.expired = true
+                            this.expired = true;
+                            data.time_expired = true;
                             this.remaining = 0
                         } else if (diff > 0) {
                             this.remaining = parseInt(diff / 1000)
@@ -146,24 +160,35 @@
                 if (countdownTimer.expired) {
                     return
                 }
+                function updateImage(code, url, data) {
+                    if (data['image_' + code]) {
+                        return
+                    }
+                    // In the data variable, we can find a variable for each image. 
+                    Alpine.store('images')['image_' + code] = url
+                    data.correct_answers += 1;
+                    data['image_' + code] = true;
+                    if (data.correct_answers === 4) {
+                        data.open_video = true;
+                    }
+                }
                 // When the form is submitted, verify the code. There are four correct codes: (0001, 0002, 0003, 0004), corresponding to the matching images. If the code is correct, we use the $store
                 if (code === '0001') {
-                    // Print the value of the alpine store variable
-                    Alpine.store('images').image_1 = urls.image_1
+                    updateImage(1, urls.image_1, data)
                 } else if (code === '0002') {
-                    Alpine.store('images').image_2 = urls.image_2
+                    updateImage(2, urls.image_2, data)
                 } else if (code === '0003') {
-                    Alpine.store('images').image_3 = urls.image_3
+                    updateImage(3, urls.image_3, data)
                 } else if (code === '0004') {
-                    Alpine.store('images').image_4 = urls.image_4
+                    updateImage(4, urls.image_4, data)
                 } else {
                     // If the code is incorrect we subtract 10 seconds from the timer.
-                    countdownTimer.expiry = countdownTimer.expiry - 10000;
-                    data.open = true;
+                    countdownTimer.expiry = countdownTimer.expiry - 10000
+                    data.open = true
                     // Hide the popup after 2 seconds.
                     setTimeout(() => {
-                        data.open = false;
-                    }, 2000);
+                        data.open = false
+                    }, 2000)
                 }
                 return countdownTimer
             }
