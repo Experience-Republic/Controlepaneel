@@ -10,7 +10,3 @@ Alpine.store('images', {
 window.Alpine = Alpine
 
 Alpine.start()
-
-
-
-
