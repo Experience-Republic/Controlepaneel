@@ -9,12 +9,12 @@
         <script type="module">
             import { urls } from './urls.js'
             // Make them globally available.
-            window.urls = urls
+            window.urls = urls            
         </script>
     </head>
     <body>
         <div
-            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setMinutes(new Date().getMinutes() + 10)), correct_answers: 0, open_video: false, time_expired: false, open_code_message: false }"
+            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 630)), correct_answers: 0, open_video: false, time_expired: false, open_code_message: false }"
             x-init="countdownTimer.init($data);"
         >
             <div
@@ -46,12 +46,18 @@
             >
                 -10 Seconds!
             </div>
+            <!-- The message that is shown before starting the game, instructing players to order an item on the laptop. -->
+            <div
+                class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 border-indigo-600 rounded-md bg-white p-10 z-50 font-bold text-3xl"
+                x-show="!open && !open_video && !time_expired && !open_code_message">
+                Place an order in the webshop!
+            </div>
             <!-- The message that is shown after 4 correct answers. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 border-indigo-600 rounded-md bg-white p-10 z-50 font-bold text-3xl"
                 x-show="open_code_message">
                 Open the wallbox with code: 1234
-            </div>
+            </div>            
             <video
                 class="fixed top-16 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
                 x-show="open_video"
