@@ -14,7 +14,7 @@
     </head>
     <body>
         <div
-            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setMinutes(new Date().getMinutes() + 10)), correct_answers: 0, open_video: false, time_expired: false }"
+            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setMinutes(new Date().getMinutes() + 10)), correct_answers: 0, open_video: false, time_expired: false, open_code_message: false }"
             x-init="countdownTimer.init($data);"
         >
             <div
@@ -46,16 +46,21 @@
             >
                 -10 Seconds!
             </div>
-            <!-- Here a video is played -->
+            <!-- The message that is shown after 4 correct answers. -->
+            <div
+                class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 border-indigo-600 rounded-md bg-white p-10 z-50 font-bold text-3xl"
+                x-show="open_code_message">
+                Open the wallbox with code: 1234
+            </div>
             <video
-                class="fixed top-0 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
+                class="fixed top-16 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
                 x-show="open_video"
                 controls
                 autoplay
                 src="assets/videos/All Correct.mp4"
             ></video>
             <video
-                class="fixed top-0 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
+                class="fixed top-16 left-1/2 w-3/4 -translate-x-1/2 rounded-md p-10 z-50"
                 x-show="time_expired"
                 controls
                 autoplay
@@ -108,6 +113,9 @@
                         }, 1000)
                     },
                     setRemaining(data) {
+                        if (this.expired) {
+                            return
+                        }
                         const diff = this.expiry - new Date().getTime()
                         // If the timer has expired, set the remaining time to 0, otherwise set it to the difference.
                         if (diff <= 0) {
@@ -169,10 +177,17 @@
                     data.correct_answers += 1;
                     data['image_' + code] = true;
                     if (data.correct_answers === 4) {
-                        data.open_video = true;
+                        // Stop the timer.
+                        countdownTimer.expired = true;
+                        data.open_code_message = true;
+                        // After 10 seconds, we display the instructions for opening the wallbox for 10 seconds, and afterwards show a video.
+                        setTimeout(() => {                            
+                            data.open_code_message = false;
+                            data.open_video = true;
+                        }, 10000)
                     }
                 }
-                // When the form is submitted, verify the code. There are four correct codes: (0001, 0002, 0003, 0004), corresponding to the matching images. If the code is correct, we use the $store
+                // When the form is submitted, verify the code. There are four correct codes corresponding to certain images. If the code is correct, we use the global Alpine $store to update the image.
                 if (code === '0001') {
                     updateImage(1, urls.image_1, data)
                 } else if (code === '0002') {
