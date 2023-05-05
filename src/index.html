@@ -15,8 +15,20 @@
     <body>
         <div
             x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 630)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
-            x-init="document.addEventListener('keydown', function(event) {if (event.code === 'Space') {countdownTimer.init($data);before_start=false;document.getElementById('code-input').focus();setTimeout(function() {
-                document.getElementById('code-input').value='';},100)}}, {once : true});"
+            x-init="document.addEventListener('keydown', function handleKeyDown(event) {
+                if (event.code === 'Space') {
+                  countdownTimer.init($data);
+                  before_start=false;
+                  document.getElementById('code-input').focus();
+                  setTimeout(function() {
+                    document.getElementById('code-input').value='';
+                  }, 100);
+              
+                  // Remove the event listener after it has been executed
+                  document.removeEventListener('keydown', handleKeyDown);
+                }
+              });
+              "
         >
             <div
                 class="absolute w-1/6 text-center rounded-lg left-0 right-0 mx-auto timer"
@@ -193,7 +205,7 @@
                                     window.audio.pause();
                                 }
                             }
-                        }, { once: true })
+                        })
                     }
                 }
                 // When the form is submitted, verify the code. There are four correct codes corresponding to certain images. If the code is correct, we use the global Alpine $store to update the image.
