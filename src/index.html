@@ -14,7 +14,7 @@
     </head>
     <body>
         <div
-            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 630)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
+            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 600)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
             x-init="document.addEventListener('keydown', function handleKeyDown(event) {
                 if (event.code === 'Space') {
                   countdownTimer.init($data);
@@ -64,10 +64,11 @@
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="before_start">
-                Press the red button to start.<br>You have 10:30 minutes to find all the codes!
+                Press the red button to start.<br>You have 10:00 minutes to find all the codes!
             </div>
             <!-- The message that is shown after starting the game, instructing players to order an item on the laptop. -->
             <div
+                id="webshop_message" 
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="!open && !before_start && !time_expired && !open_code_message">
                 Place an order in the webshop!
@@ -80,31 +81,35 @@
                 Find the tag <br>
                 Enter the code and then press the red button!
             </div>
-            <span class="absolute left-[465px] top-[144px] text-4xl text-white" x-show="image_1"> 3<span class="text-green-500">9</span>56</span> 
-            <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 742<span class="text-green-500">4</span></span> 
-            <span class="absolute right-[465px] top-[144px] text-4xl text-white" x-show="image_3"> 05<span class="text-green-500">0</span>9</span> 
-            <span class="absolute right-[465px] bottom-[65px] text-4xl text-white" x-show="image_4"> <span class="text-green-500">1</span>833</span> 
+            <span class="absolute left-[465px] top-[144px] text-4xl text-white" x-show="image_1"> 3956</span> 
+            <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 7424</span> 
+            <span class="absolute right-[465px] top-[144px] text-4xl text-white" x-show="image_3"> 0509</span> 
+            <span class="absolute right-[465px] bottom-[65px] text-4xl text-white" x-show="image_4"> 1833</span> 
         </div>
         <div id="image-holder">
                 <img
+                    class="opacity-0"
                     x-data
                     :src="$store.images.image_1"
                     alt="1"
                     id="img-1"
                 />
                 <img
+                    class="opacity-0"
                     x-data
                     :src="$store.images.image_2"
                     alt="2"
                     id="img-2"
                 />
                 <img
+                    class="opacity-0"
                     x-data
                     :src="$store.images.image_3"
                     alt="3"
                     id="img-3"
                 />
                 <img
+                    class="opacity-0"
                     x-data
                     :src="$store.images.image_4"
                     alt="4"
@@ -233,6 +238,14 @@
                     audio.play();
                     updateImage(4, urls.image_4, data)
                     document.getElementById('code-input').value = '';
+                } else if (code === '0101') {
+                    // Remove the opacity-0 class from all the images.
+                    const images = document.querySelectorAll('#image-holder img');
+                    images.forEach((image) => {
+                        image.classList.remove('opacity-0');
+                        document.getElementById('code-input').value = '';
+                    })
+                    document.getElementById('webshop_message').classList.add('opacity-0');
                 } else {
                     // Play the error sound from the urls variable.
                     const audio = new Audio(urls.error);
