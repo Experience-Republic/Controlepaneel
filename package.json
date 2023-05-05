@@ -6,7 +6,8 @@
     "source": "src/index.html",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "npx parcel src/index.html --no-cache"
+        "dev": "npx parcel src/index.html",
+        "build": "npx parcel build src/index.html"
     },
     "author": "Pieter den Toom",
     "license": "ISC",
