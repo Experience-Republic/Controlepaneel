@@ -79,7 +79,11 @@
                 Discover the pattern and find the code <br>
                 Find the tag <br>
                 Enter the code and then press the red button!
-            </div> 
+            </div>
+            <span class="absolute left-[465px] top-[144px] text-4xl text-white" x-show="image_1"> 3<span class="text-green-500">9</span>56</span> 
+            <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 742<span class="text-green-500">4</span></span> 
+            <span class="absolute right-[465px] top-[144px] text-4xl text-white" x-show="image_3"> 05<span class="text-green-500">0</span>9</span> 
+            <span class="absolute right-[465px] bottom-[65px] text-4xl text-white" x-show="image_4"> <span class="text-green-500">1</span>833</span> 
         </div>
         <div id="image-holder">
                 <img
@@ -209,22 +213,22 @@
                     }
                 }
                 // When the form is submitted, verify the code. There are four correct codes corresponding to certain images. If the code is correct, we use the global Alpine $store to update the image.
-                if (code === '0001') {
+                if (code === '3956') {
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(1, urls.image_1, data)
                     document.getElementById('code-input').value = '';
-                } else if (code === '0002') {
+                } else if (code === '7424') {
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(2, urls.image_2, data)
                     document.getElementById('code-input').value = '';
-                } else if (code === '0003') {
+                } else if (code === '0509') {
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(3, urls.image_3, data)
                     document.getElementById('code-input').value = '';
-                } else if (code === '0004') {
+                } else if (code === '1833') {
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(4, urls.image_4, data)
