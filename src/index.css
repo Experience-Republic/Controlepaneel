@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+div#image-holder{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index:-1;
+    /* The background is the background.png file */
+    background-image: url("./assets/background.png");
+    /* Only show image once */
+    background-repeat: no-repeat;
+}
+img#img-1{
+    position:absolute;
+    top:0px;
+}
+img#img-2{
+    position:absolute;
+    bottom:0px;
+}
+img#img-3{
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+img#img-4{
+    position:absolute;
+    bottom:0px;
+    right:0px
+}
