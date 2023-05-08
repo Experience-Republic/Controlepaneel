@@ -82,8 +82,8 @@
                 Enter the code and then press the red button!
             </div>
             <span class="absolute left-[465px] top-[144px] text-4xl text-white" x-show="image_1"> 3956</span> 
-            <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 7424</span> 
-            <span class="absolute right-[465px] top-[144px] text-4xl text-white" x-show="image_3"> 0509</span> 
+            <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 2584</span> 
+            <span class="absolute right-[465px] top-[144px] text-4xl text-white" x-show="image_3"> 7424</span> 
             <span class="absolute right-[465px] bottom-[65px] text-4xl text-white" x-show="image_4"> 1833</span> 
         </div>
         <div id="image-holder">
@@ -223,12 +223,12 @@
                     audio.play();
                     updateImage(1, urls.image_1, data)
                     document.getElementById('code-input').value = '';
-                } else if (code === '7424') {
+                } else if (code === '2584') {
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(2, urls.image_2, data)
                     document.getElementById('code-input').value = '';
-                } else if (code === '0509') {
+                } else if (code === '7424') {
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(3, urls.image_3, data)
