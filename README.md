@@ -13,7 +13,7 @@ The objective is to find and enter 4 codes (3956, 0509, 7424, 1833), this will d
 
 ## Important
 - **The control panel layout needs to be displayed in fullscreen mode (F11-button) on a screen with a resolution of 1920 * 1080**
-- The panel can be resetted by pressing F5.
+- The panel can be resetted by entering the code /**/.
 
 
 
