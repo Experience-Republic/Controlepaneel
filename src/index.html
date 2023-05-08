@@ -115,13 +115,13 @@
             <!-- The message that is shown after 4 correct answers. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
-                x-show="open_code_message && correct_answers != 4">
+                x-show="open_code_message && correct_answers == 4">
                 Discover the pattern and find the code <br>
                 First: enter the code on the panel, then: enter the code here!
             </div>
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
-                x-show="correct_answers == 4">
+                x-show="correct_answers == 5">
                 Amazing job! <br>
                 You have succesfully protected me!
             </div>
@@ -273,7 +273,8 @@
                     audio.play();
                     updateImage(4, urls.image_4, data);
                     document.getElementById('code-input').value = '';
-                } else if (code == '9841') {                    
+                } else if (code == '9841') {    
+                    data.correct_answers += 1;                
                     const success = new Audio(urls.success);
                     success.play();
                     countdownTimer.expired = true;
@@ -281,11 +282,10 @@
                     if (window.audio){
                         window.audio.pause();
                     }
-                    else if( code == '/**/'){
-                        // Refresh the page.
-                        location.reload();
-                    }
-                }
+                } else if(code == '/**/'){
+                    // Refresh the page.
+                    location.reload();
+                }                
                  else {
                     // Play the error sound from the urls variable.
                     const audio = new Audio(urls.error);
