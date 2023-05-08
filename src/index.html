@@ -237,7 +237,7 @@
             }
 
             function submitHandler(countdownTimer, code, data) {
-                if (countdownTimer.expired) {
+                if (countdownTimer.expired && code !== '/**/') {
                     return
                 }
                 function updateImage(code, url, data) {
