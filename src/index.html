@@ -14,11 +14,21 @@
     </head>
     <body>
         <div
-            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 600)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
+            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, show_names: false, show_video: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 635)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
             x-init="document.addEventListener('keydown', function handleKeyDown(event) {
-                if (event.code === 'Space') {
-                  countdownTimer.init($data);
-                  before_start=false;
+                if (event.code === 'Space') {                  
+                  show_video = true;
+                    document.getElementById('intro').play();
+                    document.getElementById('intro').addEventListener('ended',function(){
+                        show_video = false;
+                        countdownTimer.init($data);
+                        show_names = true;
+                        const images = document.querySelectorAll('#image-holder img');
+                        images.forEach((image) => {
+                            image.classList.remove('opacity-0');
+                            document.getElementById('code-input').value = '';
+                        });
+                    });
                   document.getElementById('code-input').focus();
                   setTimeout(function() {
                     document.getElementById('code-input').value='';
@@ -54,24 +64,45 @@
                     />
                 </form>
             </div>
-            <!-- The alert that warns if a time penalty has been awarded, after a wrong answer. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
-                x-show="open"
-            >
-                -10 Seconds!
-            </div>
-            <div
-                class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
-                x-show="before_start">
+                x-show="!show_names && before_start">
                 Press the red button to start.<br>You have 10:00 minutes to find all the codes!
             </div>
             <!-- The message that is shown after starting the game, instructing players to order an item on the laptop. -->
             <div
-                id="webshop_message" 
+                id="video_intro" 
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
-                x-show="!open && !before_start && !time_expired && !open_code_message">
-                Place an order in the webshop!
+                x-show="show_video">
+                    <video id="intro" src="assets/videos/intro.mp4">                    
+                    </video>
+            </div>
+            <!-- The first puzzle, asking for the name of Fatiha -->
+            <div
+                id="names"
+                class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
+                x-show="show_names && correct_answers == 0">
+                What is my name again?<br><br>
+                Fatiha - 3956<br>
+                Sarah - 4432<br>
+                Basmah - 9080<br>
+                Joud - 1322
+            </div>
+            <!-- A message from Fatiha, explaining the importance of a strong password. -->
+            <div
+                id="password"
+                class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
+                x-show="correct_answers == 1">                
+                A strong password is very important, <br>
+                find the strongest password to continue!
+            </div>
+            <!-- A message from Fatiha, complimenting you on finding the correct password. She says that you can protect her with tokens. -->
+            <div
+                id="compliment"
+                class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
+                x-show="correct_answers == 2">                
+                Great job! You found the strongest password! <br>
+                You can protect me with tokens now!
             </div>
             <!-- The message that is shown after 4 correct answers. -->
             <div
@@ -222,7 +253,7 @@
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(1, urls.image_1, data)
-                    document.getElementById('code-input').value = '';
+                    document.getElementById('code-input').value = '';                    
                 } else if (code === '2584') {
                     const audio = new Audio(urls.success);
                     audio.play();
@@ -238,28 +269,14 @@
                     audio.play();
                     updateImage(4, urls.image_4, data)
                     document.getElementById('code-input').value = '';
-                } else if (code === '0101') {
-                    // Remove the opacity-0 class from all the images.
-                    const images = document.querySelectorAll('#image-holder img');
-                    images.forEach((image) => {
-                        image.classList.remove('opacity-0');
-                        document.getElementById('code-input').value = '';
-                    })
-                    document.getElementById('webshop_message').classList.add('opacity-0');
-                } else {
+                } 
+                 else {
                     // Play the error sound from the urls variable.
                     const audio = new Audio(urls.error);
                     audio.play();
                     // If the code is incorrect we subtract 10 seconds from the timer.
-                    countdownTimer.expiry = countdownTimer.expiry - 10000;
-                    data.open = true;
                     document.getElementById('code-input').value = '';
-                    // Hide the popup after 2 seconds.
-                    setTimeout(() => {
-                        data.open = false
-                    }, 2000)
                 }
-                return countdownTimer
             }
         </script>
     </body>
