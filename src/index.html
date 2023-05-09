@@ -14,9 +14,9 @@
     </head>
     <body>
         <div
-            x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, open: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 600)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
+            x-data="{ image_1:false, image_2:false, image_3:false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 600)), image_4:false, open: false, correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
             x-init="document.addEventListener('keydown', function handleKeyDown(event) {
-                if (event.code === 'Space') {
+                if (event.code === 'Space') {                  
                   countdownTimer.init($data);
                   before_start=false;
                   document.getElementById('code-input').focus();
@@ -78,8 +78,8 @@
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="open_code_message && correct_answers==4">
                 Discover the pattern and find the code <br>
-                Find the tag <br>
-                Enter the code and then press the red button!
+                Find the tag and use it<br>
+                Enter the code on the wall panel, and then enter it here. 
             </div>
             <!-- The message that is shown after 4 correct answers. -->
             <div
