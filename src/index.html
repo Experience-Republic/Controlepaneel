@@ -16,7 +16,8 @@
         <div
             x-data="{ image_1:false, image_2:false, image_3:false, image_4:false, show_names: false, show_video: false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 635)), correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
             x-init="document.addEventListener('keydown', function handleKeyDown(event) {
-                if (event.code === 'Space') {                  
+                if (event.code === 'Space') {
+                    countdownTimer = timer(new Date().setSeconds(new Date().getSeconds() + 635));                  
                   show_video = true;
                     document.getElementById('intro').play();
                     document.getElementById('intro').addEventListener('ended',function(){
