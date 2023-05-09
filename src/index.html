@@ -16,7 +16,8 @@
         <div
             x-data="{ image_1:false, image_2:false, image_3:false, countdownTimer : timer(new Date().setSeconds(new Date().getSeconds() + 600)), image_4:false, open: false, correct_answers: 0, time_expired: false, open_code_message: false, before_start: true }"
             x-init="document.addEventListener('keydown', function handleKeyDown(event) {
-                if (event.code === 'Space') {                  
+                if (event.code === 'Space') {
+                  countdownTimer = timer(new Date().setSeconds(new Date().getSeconds() + 600));                 
                   countdownTimer.init($data);
                   before_start=false;
                   document.getElementById('code-input').focus();
