@@ -165,6 +165,11 @@
         <!-- A background image -->
         <!-- A button that says "Press enter to start" -->
         <script>
+            const companion_urls = {
+                "green":"http://192.168.1.18:8888/press/bank/1/20",
+                "red":"http://192.168.1.18:8888/press/bank/1/19",
+                "white":"http://192.168.1.18:8888/press/bank/1/18",
+            }
             function timer(expiry) {
                 return {
                     expired: false, // Whether the timer has expired
@@ -255,26 +260,46 @@
                 }
                 // When the form is submitted, verify the code. There are four correct codes corresponding to certain images. If the code is correct, we use the global Alpine $store to update the image.
                 if (code === '3956') {
+                    fetch(companion_urls.green, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(1, urls.image_1, data);
                     document.getElementById('code-input').value = '';                    
                 } else if (code === '7531') {
+                    fetch(companion_urls.green, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(2, urls.image_2, data);
                     document.getElementById('code-input').value = '';
                 } else if (code === '7424') {
+                    fetch(companion_urls.green, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(3, urls.image_3, data);
                     document.getElementById('code-input').value = '';
                 } else if (code === '1833') {
+                    fetch(companion_urls.green, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
                     const audio = new Audio(urls.success);
                     audio.play();
                     updateImage(4, urls.image_4, data);
                     document.getElementById('code-input').value = '';
-                } else if (code == '9841') {    
+                } else if (code == '9841') {   
+                    fetch(companion_urls.green, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json()); 
                     data.correct_answers += 1;                
                     const success = new Audio(urls.success);
                     success.play();
@@ -288,6 +313,10 @@
                     location.reload();
                 }                
                  else {
+                    fetch(companion_urls.red, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
                     // Play the error sound from the urls variable.
                     const audio = new Audio(urls.error);
                     audio.play();
