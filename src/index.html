@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="index.css" />
@@ -239,7 +240,19 @@
                     document.getElementById('code-input').value = '';
                 } else if (code === '0101') {
                     // Send http request to http://127.0.0.1:8888/press/bank/1/3                    
+                    fetch('http://169.254.4.2:8888/press/bank/1/3', {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
                     fetch('https://169.254.4.2:8888/press/bank/1/3', {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
+                    fetch('http://169.254.4.2:8443/press/bank/1/3', {
+                        method: 'GET',
+                    })
+                    .then(response => response.json());
+                    fetch('https://169.254.4.2:8443/press/bank/1/3', {
                         method: 'GET',
                     })
                     .then(response => response.json());
