@@ -2,7 +2,7 @@
 A brief summary of the specifications of the kids version of the control panel.
 
 ## Objective
-The objective is to find and enter 4 codes (3956, 7531, 7424, 1833), this will display a new clue leading the user to the next puzzle. If the next puzzle has been solved, the code 9841 will stop the timer.
+The objective is to find and enter 4 codes (3956, 7531, 7424, 1833), this will display a new clue leading the user to the next puzzle. If the next puzzle has been solved, the code 9341 will stop the timer.
 
 ## Specifics
 - The visitor presses the red button to start the video of Sarah, explaining that she has been hacked.
