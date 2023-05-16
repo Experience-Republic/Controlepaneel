@@ -205,6 +205,10 @@
             }
 
             function submitHandler(countdownTimer, code, data) {
+                if(code == '/**/'){
+                    // Refresh the page.
+                    location.reload();
+                }
                 if (countdownTimer.expired) {
                     return
                 }
@@ -283,9 +287,6 @@
                     if (window.audio){
                         window.audio.pause();
                     }
-                } else if(code == '/**/'){
-                    // Refresh the page.
-                    location.reload();
                 } else {
                     fetch(companion_urls.red, {
                         method: 'GET',
