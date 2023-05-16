@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* All divs should have rtl text. */
+div.fixed{
+    direction: rtl;
+}
 div#image-holder{
     position: relative;
     width: 100vw;
