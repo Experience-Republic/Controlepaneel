@@ -60,34 +60,34 @@
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="open"
             >
-                -10 Seconds!
+            (١٠) ثواني!
             </div>
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="before_start">
-                Press the red button to start.<br>You have 10:00 minutes to find all the codes!
+                اضغط على الزر الأحمر للبدء.<br>لديك (١٠:٠٠) دقائق للعثور على كل الرموز!
             </div>
             <!-- The message that is shown after starting the game, instructing players to order an item on the laptop. -->
             <div
                 id="webshop_message" 
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="!open && !before_start && !time_expired && !open_code_message">
-                Place an order in the webshop!
+                أتمم الطلب في المتجر الإلكتروني!
             </div>
             <!-- The message that is shown after 4 correct answers. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="open_code_message && correct_answers==4">
-                Discover the pattern and find the code <br>
-                Find the tag and use it<br>
-                Enter the code on the wall panel, and then enter it here. 
+                اكتشف النمط وابحث عن الرمز <br>
+                ابحث عن العلامة واستخدمها<br>
+                أدخل الرمز الموجود على اللوحة، ثم أدخله هنا. 
             </div>
             <!-- The message that is shown after 4 correct answers. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="correct_answers==5">
-                Amazing job! <br>
-                You have successfully completed the game!
+                رائع! <br>
+                لقد أكملت اللعبة بنجاح!
             </div>
             <span class="absolute left-[465px] top-[144px] text-4xl text-white" x-show="image_1"> 3956</span> 
             <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 7424</span> 
