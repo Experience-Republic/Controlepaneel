@@ -61,14 +61,13 @@
                         maxlength="4"
                         type="text"
                         class="border-2 px-4 py-2 w-1/6 top-40 absolute left-0 right-0 mx-auto border bg-black text-white border-gray-300 rounded-md"
-                        placeholder="Enter Code"
                     />
                 </form>
             </div>
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="!show_names && before_start">
-                Press the red button to start.<br>You have 10:00 minutes to find all the codes!
+                اضغط على الزر الأحمر للبدء.<br>لديك (١٠:٠٠) دقائق للعثور على كل الرموز!
             </div>
             <!-- The message that is shown after starting the game, instructing players to order an item on the laptop. -->
             <div
@@ -83,48 +82,43 @@
                 id="names"
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="show_names && correct_answers == 0">
-                What is my name again?<br><br>
-                Sarah - 3956<br>
-                Fatiha - 4432<br>
-                Basmah - 9080<br>
-                Joud - 1322
+                ما هو اسمي؟<br><br>
+                سارة – (٣٩٥٦) <br>
+                فتيحة – (٤٤٣٢) <br>
+                بسمة – (٩٠٨٠) <br>
+                جود – (١٣٢٢) 
             </div>
             <!-- A message from Fatiha, explaining the importance of a strong password. -->
             <div
                 id="password"
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="correct_answers == 1">                
-                A strong password is very important, <br>
-                find the strongest password to continue!
+                إن إيجاد كلمة المرور قوية أمر مهم جداً، ابحث عن أقوى كلمة مرور للمتابعة!
             </div>
             <!-- A message from Fatiha, complimenting you on finding the correct password. She says that you can protect her with tokens. -->
             <div
                 id="compliment"
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="correct_answers == 2">                
-                Great job! You found the strongest password! <br>
-                You can protect me with tokens now!
+                أحسنت! لقد أنشأت أقوى كلمة مرور! يمكنك حمايتي بالرموز الآن!
             </div>
             <!-- A message from Fatiha, complimenting you on finding the correct password. She says that you can protect her with tokens. -->
             <div
                 id="compliment_2"
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="correct_answers == 3">                
-                Our protection keeps getting stronger! <br>
-                Now we have to find the perpetrator!
+                إن حمايتنا تزداد قوة! علينا الآن أن نجد الجاني!
             </div>
             <!-- The message that is shown after 4 correct answers. -->
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="open_code_message && correct_answers == 4">
-                Discover the pattern and find the code <br>
-                First: enter the code on the panel, then: enter the code here!
+                اكتشف النمط وابحث عن الرمز. أولاً: أدخل الرمز الموجود على اللوحة، ثم: أدخل الرمز هنا!
             </div>
             <div
                 class="fixed top-1/4 left-1/2 -translate-x-1/2 border-4 text-white border-[#2be2f6] bg-black p-10 z-50 font-bold text-3xl"
                 x-show="correct_answers == 5">
-                Amazing job! <br>
-                You have succesfully protected me!
+                ممتاز! لقد قمت بحمايتي بنجاح!
             </div>
             <span class="absolute left-[465px] top-[144px] text-4xl text-white" x-show="image_1"> 3956</span> 
             <span class="absolute left-[465px] bottom-[65px] text-4xl text-white" x-show="image_2"> 7531</span> 
